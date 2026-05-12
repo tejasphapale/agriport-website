@@ -12,13 +12,13 @@
     
     <style>
         :root {
-            --primary: #059669;
-            --primary-dark: #047857;
-            --secondary: #10b981;
-            --accent: #34d399;
-            --dark: #1f2937;
-            --light: #f3f4f6;
-            --gradient: linear-gradient(135deg, #059669 0%, #047857 100%);
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --secondary: #4caf50;
+            --accent: #66bb6a;
+            --dark: #212121;
+            --light: #f5f5f5;
+            --gradient: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
         }
         
         * {
@@ -29,8 +29,8 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: #fafafa;
-            color: #1f2937;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            color: #212121;
             overflow-x: hidden;
         }
         
@@ -267,9 +267,7 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center floating-element">
-                        <i class="ri-seedling-line text-white text-xl"></i>
-                    </div>
+                    <img src="agriport-logo.png" alt="AgriPort Logo" class="w-10 h-10 rounded-lg floating-element">
                     <span class="nav-logo">AgriPort</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
@@ -304,7 +302,7 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero-gradient hero-pattern text-white pt-24 pb-20">
+    <section class="hero-gradient hero-pattern text-white pt-24 pb-20" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 50%, #4caf50 100%);">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8 fade-in">
@@ -347,7 +345,7 @@
                 </div>
                 <div class="relative slide-in">
                     <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl p-8 floating-element">
-                        <img src="https://images.unsplash.com/photo-1560473676652-9d26ba89c724?auto=format&fit=crop&w=800&q=80" 
+                        <img src="agriport-logo.png" 
                              alt="AgriPort App" 
                              class="rounded-2xl shadow-2xl w-full">
                     </div>
@@ -768,9 +766,7 @@
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
-                            <i class="ri-seedling-line text-white text-xl"></i>
-                        </div>
+                        <img src="agriport-logo.png" alt="AgriPort Logo" class="w-10 h-10 rounded-lg">
                         <span class="text-xl font-bold">AgriPort</span>
                     </div>
                     <p class="text-gray-400 mb-4">
