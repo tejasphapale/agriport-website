@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriPort - Agricultural Transport Management App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d5d44;
+            --secondary-color: #22c55e;
+            --accent-color: #4ade80;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0a4a35 100%);
+            color: white;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .download-section {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            padding: 60px 0;
+            color: white;
+        }
+        
+        .download-btn {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+            color: var(--primary-color);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            max-width: 200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-start">
+                    <h1 class="display-4 fw-bold mb-4">AgriPort</h1>
+                    <h2 class="h3 mb-4">Modern Agricultural Transport Management</h2>
+                    <p class="lead mb-4">
+                        Complete solution for farmers and transport businesses to manage crops, 
+                        transport records, payments, and customer communication.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://via.placeholder.com/400x300/0d5d44/ffffff?text=AgriPort+App" 
+                         alt="AgriPort App" class="img-fluid rounded-3 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">🌟 Key Features</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h4>Transport Management</h4>
+                        <p>Track transport records with customer details and delivery status.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h4>Crop Management</h4>
+                        <p>Manage crop varieties and track yields efficiently.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h4>Payment Tracking</h4>
+                        <p>Monitor payments and generate receipts instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download-section">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">📱 Download AgriPort</h2>
+            <p class="lead mb-5 text-white">
+                Get the complete agricultural transport management solution
+            </p>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="feature-card bg-white text-center">
+                        <h4 class="mb-3">Android Application</h4>
+                        <p class="mb-4">
+                            <strong>Version:</strong> 1.1<br>
+                            <strong>Size:</strong> 52MB<br>
+                            <strong>Requirements:</strong> Android 5.0+
+                        </p>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <a href="uploads/agriport-latest.apk" class="download-btn w-100" download>
+                                    <i class="fas fa-download"></i>
+                                    Download APK
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="qr-code">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tejasphapale.github.io/agriport-website/uploads/agriport-latest.apk" 
+                                         alt="QR Code" class="img-fluid">
+                                    <p class="mt-2 mb-0 small">Scan to Download</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Installation:</strong>
+                            <ol class="mb-0 mt-2 text-start">
+                                <li>Download the APK file</li>
+                                <li>Enable "Unknown Sources" in Settings</li>
+                                <li>Tap the file to install</li>
+                                <li>Launch AgriPort!</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-2">
+                <i class="fas fa-tractor me-2"></i>
+                <strong>AgriPort</strong> - Modern Agricultural Transport Management
+            </p>
+            <p class="mb-0">© 2024 AgriPort. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
