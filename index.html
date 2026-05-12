@@ -3,31 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriPort - Agricultural Transport Management App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>AgriPort - Professional Agricultural Transport Management</title>
+    
+    <!-- Modern CSS Framework -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #0d5d44;
-            --secondary-color: #22c55e;
-            --accent-color: #4ade80;
+            --primary: #059669;
+            --primary-dark: #047857;
+            --secondary: #10b981;
+            --accent: #34d399;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #0a4a35 100%);
-            color: white;
-            padding: 80px 0 60px;
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             position: relative;
             overflow: hidden;
         }
         
-        .hero-section::before {
+        .gradient-bg::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -35,182 +46,474 @@
             width: 200%;
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: shimmer 3s infinite;
+            animation: float 20s infinite ease-in-out;
         }
         
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-100%) rotate(45deg); }
-            50% { transform: translateX(100%) rotate(45deg); }
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) translateY(-50%) rotate(180deg); }
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255,255,255,0.03) 0%, transparent 50%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .feature-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(0,0,0,0.05);
         }
         
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
         
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-        }
-        
-        .download-section {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-            padding: 60px 0;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-        }
-        
-        .download-btn {
-            background: white;
-            color: var(--primary-color);
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            padding: 1rem 2.5rem;
+            border-radius: 16px;
             font-weight: 700;
-            border-radius: 50px;
-            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+            border: none;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            gap: 0.5rem;
         }
         
-        .download-btn:hover {
+        .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-            color: var(--primary-color);
+            box-shadow: 0 15px 35px rgba(5, 150, 105, 0.4);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
         }
         
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            padding: 1.5rem;
+            border-radius: 16px;
             text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
         }
         
-        .qr-code {
+        .floating-badge {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        .qr-container {
             background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            max-width: 200px;
-            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container text-center position-relative">
-            <div class="row align-items-center">
-                <div class="col-lg-6 text-start">
-                    <h1 class="display-4 fw-bold mb-4">AgriPort</h1>
-                    <h2 class="h3 mb-4">Modern Agricultural Transport Management</h2>
-                    <p class="lead mb-4">
-                        Complete solution for farmers and transport businesses to manage crops, 
-                        transport records, payments, and customer communication.
-                    </p>
+    <!-- Navigation -->
+    <nav class="glass-effect sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                        <i class="ri-seedling-line text-white text-xl"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">AgriPort</span>
                 </div>
-                <div class="col-lg-6">
-                    <img src="https://via.placeholder.com/400x300/0d5d44/ffffff?text=AgriPort+App" 
-                         alt="AgriPort App" class="img-fluid rounded-3 shadow">
+                <div class="flex items-center space-x-6">
+                    <a href="#features" class="text-gray-600 hover:text-green-600 transition-colors">Features</a>
+                    <a href="#download" class="text-gray-600 hover:text-green-600 transition-colors">Download</a>
+                    <a href="#about" class="text-gray-600 hover:text-green-600 transition-colors">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg hero-pattern text-white py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="floating-badge inline-block bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                        🌟 PREMIUM VERSION 1.2
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        Transform Your<br>
+                        <span class="text-green-300">Agricultural</span><br>
+                        Transport Business
+                    </h1>
+                    <p class="text-xl text-green-100 mb-8 leading-relaxed">
+                        Complete digital solution for modern farmers and transport businesses. 
+                        Manage crops, transport, payments, and customer relationships - all in one powerful platform.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#download" class="btn-primary">
+                            <i class="ri-download-2-line"></i>
+                            Download Now
+                        </a>
+                        <a href="#features" class="btn-secondary">
+                            <i class="ri-play-circle-line"></i>
+                            View Features
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="glass-effect rounded-3xl p-8">
+                        <img src="https://images.unsplash.com/photo-1560473676652-9d26ba89c724?auto=format&fit=crop&w=800&q=80" 
+                             alt="AgriPort App" 
+                             class="rounded-2xl shadow-2xl w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Trusted by Farmers</h2>
+                <p class="text-xl text-gray-600">Join thousands of satisfied users</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="ri-user-3-line text-4xl text-green-600 mb-3"></i>
+                    <h3 class="text-2xl font-bold text-gray-900">10,000+</h3>
+                    <p class="text-gray-600">Active Users</p>
+                </div>
+                <div class="stat-card">
+                    <i class="ri-truck-line text-4xl text-green-600 mb-3"></i>
+                    <h3 class="text-2xl font-bold text-gray-900">50,000+</h3>
+                    <p class="text-gray-600">Transport Records</p>
+                </div>
+                <div class="stat-card">
+                    <i class="ri-seedling-line text-4xl text-green-600 mb-3"></i>
+                    <h3 class="text-2xl font-bold text-gray-900">100+</h3>
+                    <p class="text-gray-600">Crop Varieties</p>
+                </div>
+                <div class="stat-card">
+                    <i class="ri-star-line text-4xl text-green-600 mb-3"></i>
+                    <h3 class="text-2xl font-bold text-gray-900">4.9★</h3>
+                    <p class="text-gray-600">User Rating</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="section-title">🌟 Key Features</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card text-center">
-                        <div class="feature-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <h4>Transport Management</h4>
-                        <p>Track transport records with customer details and delivery status.</p>
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Powerful Features</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Everything you need to manage your agricultural transport business efficiently
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="ri-truck-line text-white text-2xl"></i>
                     </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Smart Transport</h3>
+                    <p class="text-gray-600 mb-4">
+                        Complete transport management with real-time tracking, customer details, and delivery status updates.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Real-time GPS tracking</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Customer management</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Delivery notifications</li>
+                    </ul>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card text-center">
-                        <div class="feature-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <h4>Crop Management</h4>
-                        <p>Manage crop varieties and track yields efficiently.</p>
+                
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="ri-seedling-line text-white text-2xl"></i>
                     </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Crop Management</h3>
+                    <p class="text-gray-600 mb-4">
+                        Track crop varieties, yields, and quality metrics with advanced analytics.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Yield tracking</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Quality control</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Harvest planning</li>
+                    </ul>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="feature-card text-center">
-                        <div class="feature-icon">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <h4>Payment Tracking</h4>
-                        <p>Monitor payments and generate receipts instantly.</p>
+                
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="ri-bank-card-line text-white text-2xl"></i>
                     </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Payment System</h3>
+                    <p class="text-gray-600 mb-4">
+                        Integrated payment processing with receipts and WhatsApp sharing.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Digital receipts</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>WhatsApp sharing</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Payment history</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="ri-message-3-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Real-time Chat</h3>
+                    <p class="text-gray-600 mb-4">
+                        WhatsApp-style messaging for instant customer communication.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Instant messaging</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>File sharing</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Message history</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="ri-bar-chart-box-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Analytics</h3>
+                    <p class="text-gray-600 mb-4">
+                        Comprehensive reports and business insights.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Daily reports</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Revenue tracking</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Performance metrics</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="ri-shield-check-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Secure & Private</h3>
+                    <p class="text-gray-600 mb-4">
+                        User-specific data protection with secure authentication.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Data encryption</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Private storage</li>
+                        <li><i class="ri-check-line text-green-500 mr-2"></i>Secure login</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Download Section -->
-    <section class="download-section">
-        <div class="container text-center">
-            <h2 class="text-white mb-4">📱 Download AgriPort</h2>
-            <p class="lead mb-5 text-white">
-                Get the complete agricultural transport management solution
-            </p>
+    <section id="download" class="py-20 bg-gradient-to-br from-green-50 to-emerald-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Download AgriPort</h2>
+                <p class="text-xl text-gray-600">Get the complete agricultural transport management solution</p>
+            </div>
             
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="feature-card bg-white text-center">
-                        <h4 class="mb-3">Android Application</h4>
-                        <p class="mb-4">
-                            <strong>Version:</strong> 1.1<br>
-                            <strong>Size:</strong> 52MB<br>
-                            <strong>Requirements:</strong> Android 5.0+
-                        </p>
-                        
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <a href="uploads/agriport-latest.apk" class="download-btn w-100" download>
-                                    <i class="fas fa-download"></i>
-                                    Download APK
-                                </a>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="bg-white rounded-2xl p-8 shadow-xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">App Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b">
+                                <span class="text-gray-600">Version</span>
+                                <span class="font-bold text-green-600">1.2.0</span>
                             </div>
-                            <div class="col-md-6">
-                                <div class="qr-code">
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tejasphapale.github.io/agriport-website/uploads/agriport-latest.apk" 
-                                         alt="QR Code" class="img-fluid">
-                                    <p class="mt-2 mb-0 small">Scan to Download</p>
-                                </div>
+                            <div class="flex justify-between items-center py-3 border-b">
+                                <span class="text-gray-600">Size</span>
+                                <span class="font-bold text-green-600">50 MB</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b">
+                                <span class="text-gray-600">Platform</span>
+                                <span class="font-bold text-green-600">Android 5.0+</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3">
+                                <span class="text-gray-600">Category</span>
+                                <span class="font-bold text-green-600">Business</span>
                             </div>
                         </div>
-                        
-                        <div class="alert alert-info">
-                            <i class="fas fa-info-circle me-2"></i>
-                            <strong>Installation:</strong>
-                            <ol class="mb-0 mt-2 text-start">
-                                <li>Download the APK file</li>
-                                <li>Enable "Unknown Sources" in Settings</li>
-                                <li>Tap the file to install</li>
-                                <li>Launch AgriPort!</li>
-                            </ol>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-8 shadow-xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Installation</h3>
+                        <ol class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3">1</span>
+                                Download the APK file below
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3">2</span>
+                                Enable "Unknown Sources" in Settings
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3">3</span>
+                                Tap the downloaded file to install
+                            </li>
+                            <li class="flex items-start">
+                                <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3">4</span>
+                                Launch AgriPort and start managing!
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="text-center space-y-8">
+                    <div class="qr-container">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tejasphapale.github.io/agriport-website/uploads/agriport-latest.apk" 
+                             alt="Download QR Code" 
+                             class="rounded-lg">
+                        <p class="mt-4 text-gray-600 font-medium">Scan to Download</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <a href="uploads/agriport-latest.apk" download class="btn-primary text-lg">
+                            <i class="ri-download-2-line text-xl"></i>
+                            Download APK (50 MB)
+                        </a>
+                        <div class="flex items-center justify-center space-x-4 text-gray-500">
+                            <i class="ri-android-line text-xl"></i>
+                            <span>Android 5.0 and above</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">What Farmers Say</h2>
+                <p class="text-xl text-gray-600">Real feedback from real users</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4?auto=format&fit=crop&w=100&q=80" 
+                             alt="User" 
+                             class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900">Ramesh Kumar</h4>
+                            <p class="text-sm text-gray-600">Maharashtra Farmer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "AgriPort transformed my transport business. I can now manage all my deliveries and payments in one place. The app is very user-friendly!"
+                    </p>
+                    <div class="flex text-yellow-400 mt-4">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2686c6f4ca9?auto=format&fit=crop&w=100&q=80" 
+                             alt="User" 
+                             class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900">Sunita Patel</h4>
+                            <p class="text-sm text-gray-600">Transport Business Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "The crop management feature is amazing! I can track all my varieties and yields. The payment system saves me so much time."
+                    </p>
+                    <div class="flex text-yellow-400 mt-4">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f3d?auto=format&fit=crop&w=100&q=80" 
+                             alt="User" 
+                             class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-900">Vijay Singh</h4>
+                            <p class="text-sm text-gray-600">Logistics Manager</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "Best agricultural app I've used! The real-time chat feature helps me stay connected with my customers. Highly recommended!"
+                    </p>
+                    <div class="flex text-yellow-400 mt-4">
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
+                        <i class="ri-star-fill"></i>
                     </div>
                 </div>
             </div>
@@ -218,16 +521,58 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container text-center">
-            <p class="mb-2">
-                <i class="fas fa-tractor me-2"></i>
-                <strong>AgriPort</strong> - Modern Agricultural Transport Management
-            </p>
-            <p class="mb-0">© 2024 AgriPort. All rights reserved.</p>
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4">AgriPort</h4>
+                    <p class="text-gray-400">
+                        Complete agricultural transport management solution for modern farmers and businesses.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Features</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Transport Management</li>
+                        <li>Crop Tracking</li>
+                        <li>Payment System</li>
+                        <li>Real-time Chat</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Help Center</li>
+                        <li>User Guide</li>
+                        <li>FAQs</li>
+                        <li>Contact Us</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="ri-facebook-circle-fill text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="ri-twitter-fill text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="ri-instagram-fill text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="ri-whatsapp-fill text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 AgriPort. All rights reserved. | 
+                   <a href="#" class="hover:text-white transition-colors">Privacy Policy</a> | 
+                   <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </p>
+            </div>
         </div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
