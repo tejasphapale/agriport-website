@@ -872,47 +872,7 @@
             }
         }
 
-        function showThankYouModal() {
-            const thankYouHTML = `
-                <div id="thankYouModal" class="modal" style="display: flex; align-items: center; justify-content: center;">
-                    <div class="modal-content" style="max-width: 500px; text-align: center; padding: 3rem 2rem; border-radius: 20px; background: white; box-shadow: 0 12px 32px rgba(0,0,0,0.2);">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">🙏</div>
-                        <h2 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700;">Thank You!</h2>
-                        <p style="color: var(--gray-600); font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.8;">
-                            Your details have been sent to us on WhatsApp. We'll get in touch with you soon!
-                        </p>
-                        <div style="background: var(--gray-50); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid var(--primary);">
-                            <p style="color: var(--gray-800); font-weight: 600;">✅ Your APK is ready to download</p>
-                            <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 0.5rem;">Click below to continue</p>
-                        </div>
-                        <button onclick="proceedToDownload()" style="
-                            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-                            color: white;
-                            border: none;
-                            padding: 1rem 2rem;
-                            border-radius: 10px;
-                            font-size: 1rem;
-                            font-weight: 600;
-                            cursor: pointer;
-                            transition: transform 0.3s ease, box-shadow 0.3s ease;
-                            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
-                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(46, 125, 50, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(46, 125, 50, 0.3)';">
-                            📥 Continue to Download APK
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            document.body.insertAdjacentHTML('beforeend', thankYouHTML);
-            document.getElementById('thankYouModal').style.animation = 'slideInUp 0.4s ease';
-        }
 
-        function proceedToDownload() {
-            const thankYouModal = document.getElementById('thankYouModal');
-            if (thankYouModal) thankYouModal.remove();
-            triggerDownload();
-            showAlert('✅ APK Download Starting...', 'success');
-        }
 
         function handleDownload(event) {
             event.preventDefault();
@@ -940,13 +900,13 @@
             const submitBtn = document.getElementById('submitBtn');
             const originalText = document.getElementById('submitText').textContent;
             submitBtn.disabled = true;
-            document.getElementById('submitText').innerHTML = '<span class="spinner"></span> Processing...';
+            document.getElementById('submitText').innerHTML = '<span class="spinner"></span> Sending...';
 
             // Save to localStorage
             downloadDB.addRecord(formData);
 
-            // Create WhatsApp message with form details
-            const whatsappMessage = `🌾 *AgriPort Download Request*
+            // Message 1: Send to ADMIN with form details
+            const adminMessage = `🌾 *AgriPort Download Request*
 
 👤 *Name:* ${formData.name}
 📧 *Email:* ${formData.email}
@@ -958,34 +918,63 @@
 📊 *Experience:* ${formData.experience || 'N/A'}
 💬 *Message:* ${formData.message || 'N/A'}
 
----
-✅ *Thank you for downloading AgriPort!*
+━━━━━━━━━━━━━━━━━━━━━━━`;
 
-We're excited to help you manage your agricultural transport operations efficiently.
+            // Message 2: Send THANK YOU to USER
+            const userThankYouMessage = `🌾 *Thank You for Downloading AgriPort!*
 
-For any issues or support, please contact us.
+👋 Hello ${formData.name},
 
-🌾 AgriPort Team
+🎉 Your APK download has been initiated successfully!
+
+✨ *What's Next:*
+✅ Download the APK from our website
+✅ Install it on your Android device
+✅ Start managing your agricultural transport efficiently
+
+📞 *Need Help?*
+If you have any questions or need support, please reach out to us on this WhatsApp number.
+
+🚀 *Get Started Now:*
+Visit our website to download your AgriPort APK
+
+We're excited to help you transform your agricultural business! 🌾
+
+🤝 *AgriPort Team*
 `;
 
-            // Open WhatsApp with the message
-            const whatsappURL = `https://wa.me/917498665605?text=${encodeURIComponent(whatsappMessage)}`;
+            // Open WhatsApp to ADMIN
+            const adminWhatsappURL = `https://wa.me/917498665605?text=${encodeURIComponent(adminMessage)}`;
             
-            // Open WhatsApp in new tab
-            window.open(whatsappURL, '_blank');
-
-            // Close download form modal and show thank you modal
+            // Open WhatsApp to USER (will open after admin)
+            const userPhone = formData.phone.replace(/[^0-9]/g, '');
+            const userWhatsappURL = `https://wa.me/91${userPhone}?text=${encodeURIComponent(userThankYouMessage)}`;
+            
+            // Send to admin first
+            window.open(adminWhatsappURL, '_blank');
+            
+            // Send thank you to user after a delay
             setTimeout(() => {
-                closeDownloadModal();
-                updateStats();
-                submitBtn.disabled = false;
-                document.getElementById('submitText').textContent = originalText;
+                window.open(userWhatsappURL, '_blank');
                 
-                // Show thank you modal after form closes
+                // Auto-redirect after both messages sent
                 setTimeout(() => {
-                    showThankYouModal();
-                }, 500);
-            }, 1000);
+                    closeDownloadModal();
+                    updateStats();
+                    triggerDownload();
+                    showAlert('✅ Details sent! Check WhatsApp for thank you message. APK downloading...', 'success');
+                    submitBtn.disabled = false;
+                    document.getElementById('submitText').textContent = originalText;
+                    
+                    // Scroll to download section
+                    setTimeout(() => {
+                        const downloadSection = document.getElementById('download') || document.querySelector('.hero');
+                        if (downloadSection) {
+                            downloadSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 500);
+                }, 1000);
+            }, 800);
         }
 
         function triggerDownload() {
