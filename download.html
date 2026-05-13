@@ -594,7 +594,25 @@
             to { transform: rotate(360deg); }
         }
 
-        @keyframes slideInUp {
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -603,16 +621,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        #thankYouModal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 10000;
         }
     </style>
 </head>
@@ -874,6 +882,127 @@
 
 
 
+        function showThankYouModal() {
+            const thankYouHTML = `
+                <div id="thankYouOverlay" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.6);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    animation: fadeIn 0.3s ease;
+                ">
+                    <div style="
+                        background: white;
+                        border-radius: 24px;
+                        padding: 3rem 2rem;
+                        max-width: 500px;
+                        width: 90%;
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                        text-align: center;
+                        animation: slideUp 0.5s ease;
+                    ">
+                        <div style="
+                            width: 80px;
+                            height: 80px;
+                            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin: 0 auto 1.5rem;
+                            font-size: 2.5rem;
+                            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
+                        ">
+                            ✅
+                        </div>
+                        
+                        <h2 style="
+                            color: var(--primary);
+                            font-size: 2rem;
+                            font-weight: 800;
+                            margin-bottom: 0.5rem;
+                        ">Thank You!</h2>
+                        
+                        <p style="
+                            color: var(--gray-600);
+                            font-size: 1rem;
+                            margin-bottom: 1.5rem;
+                            line-height: 1.8;
+                        ">
+                            Your details have been sent successfully via WhatsApp. We'll get in touch with you soon!
+                        </p>
+                        
+                        <div style="
+                            background: linear-gradient(135deg, rgba(46, 125, 50, 0.1) 0%, rgba(76, 175, 80, 0.1) 100%);
+                            padding: 1.5rem;
+                            border-radius: 16px;
+                            margin-bottom: 2rem;
+                            border-left: 4px solid var(--primary);
+                        ">
+                            <p style="
+                                color: var(--primary);
+                                font-weight: 700;
+                                font-size: 1.1rem;
+                                margin-bottom: 0.5rem;
+                            ">🚀 Your APK is Ready!</p>
+                            <p style="
+                                color: var(--gray-600);
+                                font-size: 0.95rem;
+                            ">
+                                Click the button below to start downloading AgriPort
+                            </p>
+                        </div>
+                        
+                        <button onclick="proceedToDownloadAPK()" style="
+                            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+                            color: white;
+                            border: none;
+                            padding: 1rem 2.5rem;
+                            border-radius: 12px;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                            box-shadow: 0 8px 24px rgba(46, 125, 50, 0.3);
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 10px;
+                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 32px rgba(46, 125, 50, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(46, 125, 50, 0.3)';">
+                            <span>📥 Download APK Now</span>
+                        </button>
+                        
+                        <p style="
+                            color: var(--gray-600);
+                            font-size: 0.85rem;
+                            margin-top: 1rem;
+                        ">
+                            For support: contact us on WhatsApp
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', thankYouHTML);
+        }
+
+        function proceedToDownloadAPK() {
+            const overlay = document.getElementById('thankYouOverlay');
+            if (overlay) {
+                overlay.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => overlay.remove(), 300);
+            }
+            triggerDownload();
+            showAlert('✅ APK Download Started!', 'success');
+        }
+
         function handleDownload(event) {
             event.preventDefault();
 
@@ -905,8 +1034,8 @@
             // Save to localStorage
             downloadDB.addRecord(formData);
 
-            // Message 1: Send to ADMIN with form details
-            const adminMessage = `🌾 *AgriPort Download Request*
+            // Create WhatsApp message with form details and thank you message
+            const whatsappMessage = `🌾 *AgriPort Download Request*
 
 👤 *Name:* ${formData.name}
 📧 *Email:* ${formData.email}
@@ -918,63 +1047,35 @@
 📊 *Experience:* ${formData.experience || 'N/A'}
 💬 *Message:* ${formData.message || 'N/A'}
 
-━━━━━━━━━━━━━━━━━━━━━━━`;
+━━━━━━━━━━━━━━━━━━━━━━━
 
-            // Message 2: Send THANK YOU to USER
-            const userThankYouMessage = `🌾 *Thank You for Downloading AgriPort!*
+✅ *Thank You for Downloading AgriPort!*
 
-👋 Hello ${formData.name},
+Hello ${formData.name.split(' ')[0]}! 👋
 
-🎉 Your APK download has been initiated successfully!
+🎉 Your APK download has been initiated successfully.
+🚜 We're excited to help you transform your agricultural transport operations.
+📞 For any support or queries, feel free to reach out.
 
-✨ *What's Next:*
-✅ Download the APK from our website
-✅ Install it on your Android device
-✅ Start managing your agricultural transport efficiently
+*Download your APK from our website now!*
 
-📞 *Need Help?*
-If you have any questions or need support, please reach out to us on this WhatsApp number.
-
-🚀 *Get Started Now:*
-Visit our website to download your AgriPort APK
-
-We're excited to help you transform your agricultural business! 🌾
-
-🤝 *AgriPort Team*
+🌾 AgriPort Team
 `;
 
-            // Open WhatsApp to ADMIN
-            const adminWhatsappURL = `https://wa.me/917498665605?text=${encodeURIComponent(adminMessage)}`;
-            
-            // Open WhatsApp to USER (will open after admin)
-            const userPhone = formData.phone.replace(/[^0-9]/g, '');
-            const userWhatsappURL = `https://wa.me/91${userPhone}?text=${encodeURIComponent(userThankYouMessage)}`;
-            
-            // Send to admin first
-            window.open(adminWhatsappURL, '_blank');
-            
-            // Send thank you to user after a delay
+            // Open WhatsApp with the message
+            const whatsappURL = `https://wa.me/917498665605?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappURL, '_blank');
+
+            // Auto-redirect after WhatsApp is sent
             setTimeout(() => {
-                window.open(userWhatsappURL, '_blank');
+                closeDownloadModal();
+                updateStats();
+                submitBtn.disabled = false;
+                document.getElementById('submitText').textContent = originalText;
                 
-                // Auto-redirect after both messages sent
-                setTimeout(() => {
-                    closeDownloadModal();
-                    updateStats();
-                    triggerDownload();
-                    showAlert('✅ Details sent! Check WhatsApp for thank you message. APK downloading...', 'success');
-                    submitBtn.disabled = false;
-                    document.getElementById('submitText').textContent = originalText;
-                    
-                    // Scroll to download section
-                    setTimeout(() => {
-                        const downloadSection = document.getElementById('download') || document.querySelector('.hero');
-                        if (downloadSection) {
-                            downloadSection.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    }, 500);
-                }, 1000);
-            }, 800);
+                // Show thank you modal on download page
+                showThankYouModal();
+            }, 1500);
         }
 
         function triggerDownload() {
