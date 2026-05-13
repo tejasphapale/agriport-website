@@ -700,14 +700,29 @@
         let blockedUsers = [];
 
         function loadData() {
-            const saved = localStorage.getItem('agriport_downloads');
-            allData = saved ? JSON.parse(saved) : [];
-
-            const savedBlocked = localStorage.getItem('agriport_blocked_users');
-            blockedUsers = savedBlocked ? JSON.parse(savedBlocked) : [];
-
-            renderTable();
-            updateStats();
+            // Try to fetch from server first
+            fetch('api.php?action=get')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        allData = data.downloads;
+                        blockedUsers = data.downloads
+                            .filter(d => d.isBlocked)
+                            .map(d => d.id);
+                    }
+                    renderTable();
+                    updateStats();
+                })
+                .catch(err => {
+                    // Fallback to localStorage
+                    console.log('Using localStorage as fallback');
+                    const saved = localStorage.getItem('agriport_downloads');
+                    allData = saved ? JSON.parse(saved) : [];
+                    const savedBlocked = localStorage.getItem('agriport_blocked_users');
+                    blockedUsers = savedBlocked ? JSON.parse(savedBlocked) : [];
+                    renderTable();
+                    updateStats();
+                });
         }
 
         function isUserBlocked(userId) {
@@ -841,31 +856,74 @@
             const record = allData[index];
             const isBlocked = isUserBlocked(record.id);
 
-            if (isBlocked) {
-                blockedUsers = blockedUsers.filter(id => id !== record.id);
-                showAlert(`✅ ${record.name} has been unblocked`, 'success');
-            } else {
-                blockedUsers.push(record.id);
-                showAlert(`🚫 ${record.name} has been blocked - No access to app`, 'info');
-            }
-
-            saveBlocedUsers();
-            renderTable();
-            updateStats();
+            const action = isBlocked ? 'unblock' : 'block';
+            
+            fetch(`api.php?action=${action}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: record.id })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    if (isBlocked) {
+                        blockedUsers = blockedUsers.filter(id => id !== record.id);
+                        showAlert(`✅ ${record.name} has been unblocked`, 'success');
+                    } else {
+                        blockedUsers.push(record.id);
+                        showAlert(`🚫 ${record.name} has been blocked - No access to app`, 'info');
+                    }
+                    saveBlocedUsers();
+                    renderTable();
+                    updateStats();
+                }
+            })
+            .catch(err => {
+                // Fallback to localStorage
+                if (isBlocked) {
+                    blockedUsers = blockedUsers.filter(id => id !== record.id);
+                    showAlert(`✅ ${record.name} has been unblocked`, 'success');
+                } else {
+                    blockedUsers.push(record.id);
+                    showAlert(`🚫 ${record.name} has been blocked - No access to app`, 'info');
+                }
+                saveBlocedUsers();
+                renderTable();
+                updateStats();
+            });
         }
 
         function deleteUser(index) {
             const record = allData[index];
             document.getElementById('confirmMessage').textContent = `Are you sure you want to delete ${record.name}'s record? This cannot be undone.`;
             document.getElementById('confirmBtn').onclick = () => {
-                allData.splice(index, 1);
-                blockedUsers = blockedUsers.filter(id => id !== record.id);
-                saveBlocedUsers();
-                saveData();
-                renderTable();
-                updateStats();
-                closeModal('confirmModal');
-                showAlert(`✅ ${record.name}'s record has been deleted`, 'success');
+                fetch('api.php?action=delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: record.id })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        allData.splice(index, 1);
+                        blockedUsers = blockedUsers.filter(id => id !== record.id);
+                        saveBlocedUsers();
+                        renderTable();
+                        updateStats();
+                        closeModal('confirmModal');
+                        showAlert(`✅ ${record.name}'s record has been deleted`, 'success');
+                    }
+                })
+                .catch(err => {
+                    // Fallback to localStorage
+                    allData.splice(index, 1);
+                    blockedUsers = blockedUsers.filter(id => id !== record.id);
+                    saveBlocedUsers();
+                    renderTable();
+                    updateStats();
+                    closeModal('confirmModal');
+                    showAlert(`✅ ${record.name}'s record has been deleted`, 'success');
+                });
             };
             document.getElementById('confirmModal').classList.add('active');
         }
@@ -931,14 +989,31 @@
             document.getElementById('confirmMessage').textContent = 'Are you sure you want to delete ALL records? This cannot be undone.';
             document.getElementById('confirmBtn').textContent = 'Delete All';
             document.getElementById('confirmBtn').onclick = () => {
-                allData = [];
-                blockedUsers = [];
-                saveData();
-                saveBlocedUsers();
-                renderTable();
-                updateStats();
-                closeModal('confirmModal');
-                showAlert('✅ All records have been cleared', 'success');
+                fetch('api.php?action=clear', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        allData = [];
+                        blockedUsers = [];
+                        saveBlocedUsers();
+                        renderTable();
+                        updateStats();
+                        closeModal('confirmModal');
+                        showAlert('✅ All records have been cleared', 'success');
+                    }
+                })
+                .catch(err => {
+                    allData = [];
+                    blockedUsers = [];
+                    saveBlocedUsers();
+                    renderTable();
+                    updateStats();
+                    closeModal('confirmModal');
+                    showAlert('✅ All records have been cleared', 'success');
+                });
             };
             document.getElementById('confirmModal').classList.add('active');
         }

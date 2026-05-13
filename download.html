@@ -871,21 +871,44 @@
                 return;
             }
 
-            downloadDB.addRecord(formData);
-
             const submitBtn = document.getElementById('submitBtn');
             const originalText = document.getElementById('submitText').textContent;
             submitBtn.disabled = true;
             document.getElementById('submitText').innerHTML = '<span class="spinner"></span> Processing...';
 
-            setTimeout(() => {
+            // Send to server
+            fetch('api.php?action=add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Also save locally
+                    downloadDB.addRecord(formData);
+                    triggerDownload();
+                    showAlert('✅ Download starting! Thank you for registering.', 'success');
+                    updateStats();
+                    submitBtn.disabled = false;
+                    document.getElementById('submitText').textContent = originalText;
+                    setTimeout(() => closeDownloadModal(), 1500);
+                } else {
+                    showAlert('❌ Error: ' + data.error, 'error');
+                    submitBtn.disabled = false;
+                    document.getElementById('submitText').textContent = originalText;
+                }
+            })
+            .catch(err => {
+                console.log('Server not available, saving locally');
+                downloadDB.addRecord(formData);
                 triggerDownload();
                 showAlert('✅ Download starting! Thank you for registering.', 'success');
                 updateStats();
                 submitBtn.disabled = false;
                 document.getElementById('submitText').textContent = originalText;
                 setTimeout(() => closeDownloadModal(), 1500);
-            }, 1000);
+            });
         }
 
         function triggerDownload() {
