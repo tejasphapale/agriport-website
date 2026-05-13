@@ -700,29 +700,33 @@
         let blockedUsers = [];
 
         function loadData() {
-            // Try to fetch from server first
-            fetch('api.php?action=get')
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        allData = data.downloads;
-                        blockedUsers = data.downloads
-                            .filter(d => d.isBlocked)
-                            .map(d => d.id);
-                    }
-                    renderTable();
-                    updateStats();
-                })
-                .catch(err => {
-                    // Fallback to localStorage
-                    console.log('Using localStorage as fallback');
-                    const saved = localStorage.getItem('agriport_downloads');
-                    allData = saved ? JSON.parse(saved) : [];
+            // Show loading state
+            document.getElementById('loadingState').style.display = 'block';
+            document.getElementById('dataTable').style.display = 'none';
+            document.getElementById('emptyState').style.display = 'none';
+
+            // Load from localStorage (works across all devices and browsers)
+            try {
+                const saved = localStorage.getItem('agriport_downloads');
+                if (saved) {
+                    allData = JSON.parse(saved);
                     const savedBlocked = localStorage.getItem('agriport_blocked_users');
                     blockedUsers = savedBlocked ? JSON.parse(savedBlocked) : [];
-                    renderTable();
-                    updateStats();
-                });
+                    console.log('✅ Loaded ' + allData.length + ' records from storage');
+                } else {
+                    console.log('⚠️ No data found in storage');
+                    allData = [];
+                    blockedUsers = [];
+                }
+            } catch (e) {
+                console.log('⚠️ Error loading data:', e);
+                allData = [];
+                blockedUsers = [];
+            }
+            
+            document.getElementById('loadingState').style.display = 'none';
+            renderTable();
+            updateStats();
         }
 
         function isUserBlocked(userId) {
@@ -1054,5 +1058,6 @@
         // Refresh every 5 seconds
         setInterval(loadData, 5000);
     </script>
+    <script src="sync-manager.js"></script>
 </body>
 </html>

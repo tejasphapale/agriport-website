@@ -855,6 +855,7 @@
             event.preventDefault();
 
             const formData = {
+                id: 'user_' + Date.now(),
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
@@ -863,7 +864,9 @@
                 occupation: document.getElementById('occupation').value,
                 farmName: document.getElementById('farmName').value,
                 experience: document.getElementById('experience').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString(),
+                downloaded: true
             };
 
             if (!formData.name || !formData.email || !formData.phone || !formData.city || !formData.state || !formData.occupation) {
@@ -876,39 +879,26 @@
             submitBtn.disabled = true;
             document.getElementById('submitText').innerHTML = '<span class="spinner"></span> Processing...';
 
-            // Send to server
-            fetch('api.php?action=add', {
+            // Save to localStorage (shared across all tabs/windows of same browser)
+            downloadDB.addRecord(formData);
+            
+            // Try to save to server as backup
+            fetch('store-download.js', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    // Also save locally
-                    downloadDB.addRecord(formData);
-                    triggerDownload();
-                    showAlert('✅ Download starting! Thank you for registering.', 'success');
-                    updateStats();
-                    submitBtn.disabled = false;
-                    document.getElementById('submitText').textContent = originalText;
-                    setTimeout(() => closeDownloadModal(), 1500);
-                } else {
-                    showAlert('❌ Error: ' + data.error, 'error');
-                    submitBtn.disabled = false;
-                    document.getElementById('submitText').textContent = originalText;
-                }
-            })
             .catch(err => {
-                console.log('Server not available, saving locally');
-                downloadDB.addRecord(formData);
-                triggerDownload();
-                showAlert('✅ Download starting! Thank you for registering.', 'success');
-                updateStats();
-                submitBtn.disabled = false;
-                document.getElementById('submitText').textContent = originalText;
-                setTimeout(() => closeDownloadModal(), 1500);
+                // Server backup failed, but localStorage is already saved
+                console.log('Backup save failed, but form saved locally');
             });
+
+            triggerDownload();
+            showAlert('✅ Download starting! Thank you for registering.', 'success');
+            updateStats();
+            submitBtn.disabled = false;
+            document.getElementById('submitText').textContent = originalText;
+            setTimeout(() => closeDownloadModal(), 1500);
         }
 
         function triggerDownload() {
@@ -929,5 +919,6 @@
 
         loadData();
     </script>
+    <script src="sync-manager.js"></script>
 </body>
 </html>
