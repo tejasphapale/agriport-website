@@ -593,6 +593,27 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #thankYouModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+        }
     </style>
 </head>
 <body>
@@ -851,6 +872,48 @@
             }
         }
 
+        function showThankYouModal() {
+            const thankYouHTML = `
+                <div id="thankYouModal" class="modal" style="display: flex; align-items: center; justify-content: center;">
+                    <div class="modal-content" style="max-width: 500px; text-align: center; padding: 3rem 2rem; border-radius: 20px; background: white; box-shadow: 0 12px 32px rgba(0,0,0,0.2);">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🙏</div>
+                        <h2 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700;">Thank You!</h2>
+                        <p style="color: var(--gray-600); font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.8;">
+                            Your details have been sent to us on WhatsApp. We'll get in touch with you soon!
+                        </p>
+                        <div style="background: var(--gray-50); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid var(--primary);">
+                            <p style="color: var(--gray-800); font-weight: 600;">✅ Your APK is ready to download</p>
+                            <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 0.5rem;">Click below to continue</p>
+                        </div>
+                        <button onclick="proceedToDownload()" style="
+                            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+                            color: white;
+                            border: none;
+                            padding: 1rem 2rem;
+                            border-radius: 10px;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: transform 0.3s ease, box-shadow 0.3s ease;
+                            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(46, 125, 50, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(46, 125, 50, 0.3)';">
+                            📥 Continue to Download APK
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', thankYouHTML);
+            document.getElementById('thankYouModal').style.animation = 'slideInUp 0.4s ease';
+        }
+
+        function proceedToDownload() {
+            const thankYouModal = document.getElementById('thankYouModal');
+            if (thankYouModal) thankYouModal.remove();
+            triggerDownload();
+            showAlert('✅ APK Download Starting...', 'success');
+        }
+
         function handleDownload(event) {
             event.preventDefault();
 
@@ -898,7 +961,7 @@
 ---
 ✅ *Thank you for downloading AgriPort!*
 
-We're excited to help you manage your agricultural transport operations efficiently. Your APK download will start shortly.
+We're excited to help you manage your agricultural transport operations efficiently.
 
 For any issues or support, please contact us.
 
@@ -911,14 +974,17 @@ For any issues or support, please contact us.
             // Open WhatsApp in new tab
             window.open(whatsappURL, '_blank');
 
-            // Start APK download after a short delay
+            // Close download form modal and show thank you modal
             setTimeout(() => {
-                triggerDownload();
-                showAlert('✅ Thank you! Your details have been sent. APK download starting...', 'success');
+                closeDownloadModal();
                 updateStats();
                 submitBtn.disabled = false;
                 document.getElementById('submitText').textContent = originalText;
-                setTimeout(() => closeDownloadModal(), 2000);
+                
+                // Show thank you modal after form closes
+                setTimeout(() => {
+                    showThankYouModal();
+                }, 500);
             }, 1000);
         }
 
