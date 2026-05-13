@@ -879,26 +879,47 @@
             submitBtn.disabled = true;
             document.getElementById('submitText').innerHTML = '<span class="spinner"></span> Processing...';
 
-            // Save to localStorage (shared across all tabs/windows of same browser)
+            // Save to localStorage
             downloadDB.addRecord(formData);
-            
-            // Try to save to server as backup
-            fetch('store-download.js', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            })
-            .catch(err => {
-                // Server backup failed, but localStorage is already saved
-                console.log('Backup save failed, but form saved locally');
-            });
 
-            triggerDownload();
-            showAlert('✅ Download starting! Thank you for registering.', 'success');
-            updateStats();
-            submitBtn.disabled = false;
-            document.getElementById('submitText').textContent = originalText;
-            setTimeout(() => closeDownloadModal(), 1500);
+            // Create WhatsApp message with form details
+            const whatsappMessage = `🌾 *AgriPort Download Request*
+
+👤 *Name:* ${formData.name}
+📧 *Email:* ${formData.email}
+📱 *Phone:* ${formData.phone}
+🏙️ *City:* ${formData.city}
+🗺️ *State:* ${formData.state}
+💼 *Occupation:* ${formData.occupation}
+🚜 *Farm Name:* ${formData.farmName || 'N/A'}
+📊 *Experience:* ${formData.experience || 'N/A'}
+💬 *Message:* ${formData.message || 'N/A'}
+
+---
+✅ *Thank you for downloading AgriPort!*
+
+We're excited to help you manage your agricultural transport operations efficiently. Your APK download will start shortly.
+
+For any issues or support, please contact us.
+
+🌾 AgriPort Team
+`;
+
+            // Open WhatsApp with the message
+            const whatsappURL = `https://wa.me/917498665605?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, '_blank');
+
+            // Start APK download after a short delay
+            setTimeout(() => {
+                triggerDownload();
+                showAlert('✅ Thank you! Your details have been sent. APK download starting...', 'success');
+                updateStats();
+                submitBtn.disabled = false;
+                document.getElementById('submitText').textContent = originalText;
+                setTimeout(() => closeDownloadModal(), 2000);
+            }, 1000);
         }
 
         function triggerDownload() {
