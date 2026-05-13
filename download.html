@@ -3,149 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download AgriPort App - Smart Agricultural Management</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Download AgriPort - Modern Agricultural Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --primary: #2e7d32;
+            --primary-light: #4caf50;
             --primary-dark: #1b5e20;
-            --secondary: #4caf50;
-            --accent: #66bb6a;
+            --secondary: #66bb6a;
+            --accent: #81c784;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #eeeeee;
+            --gray-300: #e0e0e0;
+            --gray-600: #757575;
+            --gray-800: #424242;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.18);
+            --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f8fdf6 0%, #eef5eb 100%);
+            color: var(--gray-800);
+            line-height: 1.6;
+            min-height: 100vh;
         }
 
-        .form-container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            max-width: 500px;
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--gray-100);
         }
 
-        .form-header {
-            text-align: center;
-            margin-bottom: 30px;
+        .header-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .form-header h1 {
-            color: var(--primary);
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .form-header p {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #333;
-            font-weight: 500;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .error-message {
-            color: #d32f2f;
-            font-size: 12px;
-            margin-top: 4px;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .form-group.error input,
-        .form-group.error select,
-        .form-group.error textarea {
-            border-color: #d32f2f;
-        }
-
-        .download-btn {
-            width: 100%;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            padding: 14px;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 4rem 0;
+            min-height: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--gray-800);
+        }
+
+        .hero-content h1 .highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
-            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
         }
 
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.3);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            box-shadow: var(--shadow-lg);
         }
 
-        .download-btn:active {
-            transform: translateY(0);
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
         }
 
-        .download-btn.loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        .success-message {
-            display: none;
-            background: #e8f5e9;
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
             border: 2px solid var(--primary);
-            color: var(--primary-dark);
-            padding: 16px;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 20px;
+            box-shadow: var(--shadow-md);
         }
 
-        .success-message.show {
-            display: block;
-            animation: slideIn 0.3s ease;
+        .btn-secondary:hover {
+            background: var(--gray-50);
+            border-color: var(--primary-dark);
         }
 
-        @keyframes slideIn {
+        .btn-icon {
+            font-size: 1.3rem;
+        }
+
+        .hero-visual {
+            perspective: 1000px;
+        }
+
+        .phone-mockup {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: var(--shadow-xl);
+            transform: rotateY(-15deg) rotateX(5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .phone-mockup:hover {
+            transform: rotateY(-10deg) rotateX(2deg);
+        }
+
+        .phone-screen {
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
+            border-radius: 32px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 24px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -153,360 +292,619 @@
             }
         }
 
-        .back-link {
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 24px 24px 0 0;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-body {
+            padding: 2.5rem 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 0.95rem;
+        }
+
+        .form-group label .required {
+            color: #e53935;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: var(--gray-50);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+        }
+
+        input::placeholder {
+            color: var(--gray-600);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .form-checkbox input {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .form-checkbox label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .form-footer {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-block {
+            flex: 1;
+            justify-content: center;
+        }
+
+        .alert {
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert.show {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #4caf50;
+        }
+
+        .alert-error {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            color: #1565c0;
+            border-left: 4px solid #2196f3;
+        }
+
+        .qr-container {
             text-align: center;
-            margin-top: 20px;
+            padding: 2rem;
+            background: var(--gray-50);
+            border-radius: 16px;
+            margin-bottom: 2rem;
         }
 
-        .back-link a {
+        .qr-container h3 {
+            margin-bottom: 1.5rem;
             color: var(--primary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
         }
 
-        .back-link a:hover {
-            text-decoration: underline;
+        .qr-code {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 1.5rem;
+            background: var(--white);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
         }
 
-        .info-box {
-            background: #f0f7f0;
-            border-left: 4px solid var(--primary);
-            padding: 12px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            color: #1b5e20;
+        .qr-code img {
+            width: 100%;
+            height: 100%;
         }
 
-        .info-box i {
-            margin-right: 8px;
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
         }
 
-        @media (max-width: 640px) {
-            .form-container {
-                padding: 25px;
-                margin: 20px;
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        footer {
+            background: var(--gray-800);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 2rem 0;
+                min-height: auto;
             }
 
-            .form-header h1 {
-                font-size: 24px;
+            .hero-content h1 {
+                font-size: 2.2rem;
             }
+
+            .header-wrapper {
+                padding: 1rem;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .modal-header {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Header Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="index.html" class="text-2xl font-bold" style="color: var(--primary);">
-                🌾 AgriPort
+    <header>
+        <div class="header-wrapper">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🌾</div>
+                <span>AgriPort</span>
             </a>
-            <a href="index.html" class="text-sm font-medium" style="color: var(--primary); text-decoration: none;">
-                ← Back to Home
-            </a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="#features">Features</a>
+                <a href="#download">Download</a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Main Content -->
-    <div class="min-h-screen flex items-center justify-center py-8">
-        <div class="form-container">
-            <!-- Success Message -->
-            <div class="success-message" id="successMessage">
-                <i class="ri-check-circle-line"></i>
-                <p id="successText">✅ Form submitted successfully! Your APK download will begin shortly.</p>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Get <span class="highlight">AgriPort</span> Today</h1>
+                <p>Transform your agricultural business with our modern, intelligent farming platform. Manage crops, track transport, and grow your farm efficiently.</p>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="downloads">10K+</div>
+                        <div class="stat-label">Downloads</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.8⭐</div>
+                        <div class="stat-label">Ratings</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Districts</div>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="openDownloadModal()">
+                        <span class="btn-icon">📥</span>
+                        Get App
+                    </button>
+                    <button class="btn btn-secondary" onclick="openQRModal()">
+                        <span class="btn-icon">📱</span>
+                        Scan QR
+                    </button>
+                </div>
             </div>
 
-            <!-- Form Header -->
-            <div class="form-header">
-                <h1>📱 Download AgriPort</h1>
-                <p>Fill in your details to download the app</p>
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2rem;">
+                            <div style="font-size: 3rem;">🌾</div>
+                            <div style="text-align: center;">
+                                <div style="font-weight: 700; font-size: 1.2rem;">AgriPort</div>
+                                <div style="font-size: 0.8rem; opacity: 0.7;">Smart Farming</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <!-- Info Box -->
-            <div class="info-box">
-                <i class="ri-information-line"></i>
-                Please fill all fields correctly to receive your APK download
+        <section class="features" id="features">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Smart Analytics</h3>
+                <p>Track crop yield, weather patterns, and market prices with real-time insights.</p>
             </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚛</div>
+                <h3>Transport Management</h3>
+                <p>Efficient logistics management with live tracking and route optimization.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Community Chat</h3>
+                <p>Connect with fellow farmers, share experiences, and get expert advice.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3>Payment Integration</h3>
+                <p>Secure payments, invoicing, and transaction history all in one place.</p>
+            </div>
+        </section>
+    </main>
 
-            <!-- Download Form -->
-            <form id="downloadForm" onsubmit="handleDownload(event)">
-                <!-- Name Field -->
-                <div class="form-group">
-                    <label for="name">
-                        👤 Full Name *
-                    </label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        placeholder="Enter your full name"
-                        required
-                    >
-                    <div class="error-message">Please enter your full name</div>
-                </div>
+    <div class="modal" id="downloadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📥 Download AgriPort</h2>
+                <p>Fill in your details to get instant access</p>
+                <button class="close-btn" onclick="closeDownloadModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="downloadAlert" class="alert"></div>
+                <form id="downloadForm" onsubmit="handleDownload(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
 
-                <!-- Email Field -->
-                <div class="form-group">
-                    <label for="email">
-                        📧 Email Address *
-                    </label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="Enter your email address"
-                        required
-                    >
-                    <div class="error-message">Please enter a valid email address</div>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Mobile Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City <span class="required">*</span></label>
+                            <input type="text" id="city" name="city" placeholder="Enter your city" required>
+                        </div>
+                    </div>
 
-                <!-- Mobile Number Field -->
-                <div class="form-group">
-                    <label for="mobile">
-                        📱 Mobile Number *
-                    </label>
-                    <input 
-                        type="tel" 
-                        id="mobile" 
-                        name="mobile" 
-                        placeholder="Enter your 10-digit mobile number"
-                        pattern="[0-9]{10}"
-                        required
-                    >
-                    <div class="error-message">Please enter a valid 10-digit mobile number</div>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="state">State <span class="required">*</span></label>
+                            <input type="text" id="state" name="state" placeholder="Enter your state" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="occupation">Occupation <span class="required">*</span></label>
+                            <select id="occupation" name="occupation" required>
+                                <option value="">Select your occupation</option>
+                                <option value="farmer">Farmer</option>
+                                <option value="trader">Trader</option>
+                                <option value="transport">Transport Business</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <!-- City Field -->
-                <div class="form-group">
-                    <label for="city">
-                        🏙️ City *
-                    </label>
-                    <input 
-                        type="text" 
-                        id="city" 
-                        name="city" 
-                        placeholder="Enter your city name"
-                        required
-                    >
-                    <div class="error-message">Please enter your city</div>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="farmName">Farm/Business Name</label>
+                            <input type="text" id="farmName" name="farmName" placeholder="Enter your farm name (optional)">
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Experience Level</label>
+                            <select id="experience" name="experience">
+                                <option value="">Select experience level</option>
+                                <option value="beginner">Beginner (0-2 years)</option>
+                                <option value="intermediate">Intermediate (2-5 years)</option>
+                                <option value="experienced">Experienced (5+ years)</option>
+                            </select>
+                        </div>
+                    </div>
 
-                <!-- State Field -->
-                <div class="form-group">
-                    <label for="state">
-                        🗺️ State *
-                    </label>
-                    <select id="state" name="state" required>
-                        <option value="">Select your state</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Gujarat">Gujarat</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Tamil Nadu">Tamil Nadu</option>
-                        <option value="Telangana">Telangana</option>
-                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Haryana">Haryana</option>
-                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                        <option value="Other">Other</option>
-                    </select>
-                    <div class="error-message">Please select your state</div>
-                </div>
+                    <div class="form-group">
+                        <label for="message">Tell us about your needs</label>
+                        <textarea id="message" name="message" placeholder="How can AgriPort help you? (optional)"></textarea>
+                    </div>
 
-                <!-- Occupation Field -->
-                <div class="form-group">
-                    <label for="occupation">
-                        💼 Occupation *
-                    </label>
-                    <select id="occupation" name="occupation" required>
-                        <option value="">Select your occupation</option>
-                        <option value="Farmer">Farmer</option>
-                        <option value="Transport Manager">Transport Manager</option>
-                        <option value="Agricultural Dealer">Agricultural Dealer</option>
-                        <option value="Logistics Provider">Logistics Provider</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Other">Other</option>
-                    </select>
-                    <div class="error-message">Please select your occupation</div>
-                </div>
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the Terms & Conditions and Privacy Policy</label>
+                    </div>
 
-                <!-- Farm/Business Name -->
-                <div class="form-group">
-                    <label for="farmName">
-                        🏡 Farm/Business Name
-                    </label>
-                    <input 
-                        type="text" 
-                        id="farmName" 
-                        name="farmName" 
-                        placeholder="Enter your farm or business name (optional)"
-                    >
-                </div>
-
-                <!-- Comments/Notes -->
-                <div class="form-group">
-                    <label for="comments">
-                        💬 Additional Information
-                    </label>
-                    <textarea 
-                        id="comments" 
-                        name="comments" 
-                        placeholder="Any additional information you'd like to share (optional)"
-                    ></textarea>
-                </div>
-
-                <!-- Terms & Conditions -->
-                <div class="form-group">
-                    <label style="display: flex; align-items: center; cursor: pointer;">
-                        <input 
-                            type="checkbox" 
-                            id="terms" 
-                            name="terms" 
-                            required
-                            style="width: auto; margin-right: 8px;"
-                        >
-                        <span>I agree to the Terms & Conditions and Privacy Policy *</span>
-                    </label>
-                    <div class="error-message">Please accept the terms and conditions</div>
-                </div>
-
-                <!-- Download Button -->
-                <button type="submit" class="download-btn" id="downloadBtn">
-                    ⬇️ Download APK
-                </button>
-            </form>
-
-            <!-- Back Link -->
-            <div class="back-link">
-                <a href="index.html">← Back to Home</a>
+                    <div class="form-footer">
+                        <button type="button" class="btn btn-secondary btn-block" onclick="closeDownloadModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+                            <span id="submitIcon">📥</span>
+                            <span id="submitText">Download APK</span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📱 Scan QR Code</h2>
+                <p>Use your phone to scan and download AgriPort</p>
+                <button class="close-btn" onclick="closeQRModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="qr-container">
+                    <h3>Point your camera at this QR Code</h3>
+                    <div class="qr-code">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://tejasphapale.github.io/agriport-website/download.html" alt="AgriPort QR Code">
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.9rem;">Can't scan? <a href="#" style="color: var(--primary); font-weight: 600;" onclick="openDownloadModal(); closeQRModal();">Fill form instead</a></p>
+                </div>
+                <button class="btn btn-primary btn-block" onclick="closeQRModal()">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 AgriPort. All rights reserved.</p>
+    </footer>
+
     <script>
+        const downloadDB = {
+            downloads: [],
+            
+            addRecord(data) {
+                const record = {
+                    id: Date.now(),
+                    timestamp: new Date().toISOString(),
+                    ...data,
+                    status: 'completed'
+                };
+                this.downloads.push(record);
+                localStorage.setItem('agriport_downloads', JSON.stringify(this.downloads));
+                return record;
+            },
+
+            getAll() {
+                const saved = localStorage.getItem('agriport_downloads');
+                return saved ? JSON.parse(saved) : [];
+            }
+        };
+
+        function loadData() {
+            downloadDB.downloads = downloadDB.getAll();
+            updateStats();
+        }
+
+        function updateStats() {
+            const count = downloadDB.downloads.length;
+            document.getElementById('downloads').textContent = (count + 10000) + '+';
+        }
+
+        function openDownloadModal() {
+            document.getElementById('downloadModal').classList.add('active');
+        }
+
+        function closeDownloadModal() {
+            document.getElementById('downloadModal').classList.remove('active');
+            document.getElementById('downloadForm').reset();
+        }
+
+        function openQRModal() {
+            document.getElementById('qrModal').classList.add('active');
+        }
+
+        function closeQRModal() {
+            document.getElementById('qrModal').classList.remove('active');
+        }
+
+        function showAlert(message, type = 'success') {
+            const alert = document.getElementById('downloadAlert');
+            alert.textContent = message;
+            alert.className = `alert show alert-${type}`;
+            if (type === 'success') {
+                setTimeout(() => alert.classList.remove('show'), 3000);
+            }
+        }
+
         function handleDownload(event) {
             event.preventDefault();
 
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
-                mobile: document.getElementById('mobile').value,
+                phone: document.getElementById('phone').value,
                 city: document.getElementById('city').value,
                 state: document.getElementById('state').value,
                 occupation: document.getElementById('occupation').value,
                 farmName: document.getElementById('farmName').value,
-                comments: document.getElementById('comments').value,
-                downloadedAt: new Date().toISOString()
+                experience: document.getElementById('experience').value,
+                message: document.getElementById('message').value
             };
 
-            if (!validateForm(formData)) {
+            if (!formData.name || !formData.email || !formData.phone || !formData.city || !formData.state || !formData.occupation) {
+                showAlert('❌ Please fill all required fields', 'error');
                 return;
             }
 
-            const downloads = JSON.parse(localStorage.getItem('agriportDownloads') || '[]');
-            downloads.push(formData);
-            localStorage.setItem('agriportDownloads', JSON.stringify(downloads));
+            downloadDB.addRecord(formData);
 
-            console.log('Download Request:', formData);
-
-            const successMsg = document.getElementById('successMessage');
-            successMsg.classList.add('show');
-
-            const btn = document.getElementById('downloadBtn');
-            btn.classList.add('loading');
-            btn.innerHTML = '⏳ Preparing...';
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = document.getElementById('submitText').textContent;
+            submitBtn.disabled = true;
+            document.getElementById('submitText').innerHTML = '<span class="spinner"></span> Processing...';
 
             setTimeout(() => {
-                downloadAPK();
-            }, 1500);
+                triggerDownload();
+                showAlert('✅ Download starting! Thank you for registering.', 'success');
+                updateStats();
+                submitBtn.disabled = false;
+                document.getElementById('submitText').textContent = originalText;
+                setTimeout(() => closeDownloadModal(), 1500);
+            }, 1000);
         }
 
-        function validateForm(data) {
-            let isValid = true;
-
-            if (!data.name || data.name.length < 3) {
-                showError('name', 'Name must be at least 3 characters');
-                isValid = false;
-            }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!data.email || !emailRegex.test(data.email)) {
-                showError('email', 'Please enter a valid email');
-                isValid = false;
-            }
-
-            if (!data.mobile || !/^\d{10}$/.test(data.mobile)) {
-                showError('mobile', 'Mobile number must be 10 digits');
-                isValid = false;
-            }
-
-            if (!data.city || data.city.length < 2) {
-                showError('city', 'Please enter your city');
-                isValid = false;
-            }
-
-            if (!data.state) {
-                showError('state', 'Please select your state');
-                isValid = false;
-            }
-
-            if (!data.occupation) {
-                showError('occupation', 'Please select your occupation');
-                isValid = false;
-            }
-
-            if (!document.getElementById('terms').checked) {
-                showError('terms', 'You must accept the terms');
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-        function showError(fieldId, message) {
-            const field = document.getElementById(fieldId);
-            const group = field.closest('.form-group');
-            const errorMsg = group.querySelector('.error-message');
-
-            group.classList.add('error');
-            errorMsg.textContent = message;
-            errorMsg.classList.add('show');
-
-            setTimeout(() => {
-                group.classList.remove('error');
-                errorMsg.classList.remove('show');
-            }, 5000);
-        }
-
-        document.querySelectorAll('input, select, textarea').forEach(field => {
-            field.addEventListener('input', function() {
-                const group = this.closest('.form-group');
-                group.classList.remove('error');
-                const errorMsg = group.querySelector('.error-message');
-                if (errorMsg) errorMsg.classList.remove('show');
-            });
-        });
-
-        function downloadAPK() {
-            const apkPath = '../agriport-final.apk';
+        function triggerDownload() {
             const link = document.createElement('a');
-            link.href = apkPath;
-            link.download = 'agriport-final.apk';
+            link.href = 'uploads/agriport-latest.apk';
+            link.download = 'agriport-latest.apk';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-
-            const btn = document.getElementById('downloadBtn');
-            btn.classList.remove('loading');
-            btn.innerHTML = '⬇️ Download APK';
-
-            setTimeout(() => {
-                document.getElementById('downloadForm').reset();
-                const successMsg = document.getElementById('successMessage');
-                successMsg.classList.remove('show');
-            }, 2000);
         }
+
+        window.onclick = function(event) {
+            const downloadModal = document.getElementById('downloadModal');
+            const qrModal = document.getElementById('qrModal');
+            if (event.target === downloadModal) closeDownloadModal();
+            if (event.target === qrModal) closeQRModal();
+        };
+
+        loadData();
     </script>
 </body>
 </html>
