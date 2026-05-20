@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download AgriPort App - Modern Agricultural Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --gray-100: #f5f5f5;
+            --gray-800: #424242;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fdf6 0%, #eef5eb 100%);
+            color: var(--gray-800);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        nav a {
+            margin-left: 30px;
+            color: var(--gray-800);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--gray-800);
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+        }
+
+        .card p {
+            color: var(--gray-800);
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .version {
+            background: var(--gray-100);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--gray-800);
+            margin-bottom: 16px;
+        }
+
+        .file-info {
+            background: var(--gray-100);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .file-info strong {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-800);
+            margin-left: 12px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-200);
+        }
+
+        .features {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .features h2 {
+            font-size: 32px;
+            margin-bottom: 32px;
+            color: var(--primary-dark);
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            padding: 20px;
+            border-left: 4px solid var(--primary-light);
+            background: var(--gray-100);
+            border-radius: 6px;
+        }
+
+        .feature-item h4 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            font-size: 14px;
+            color: var(--gray-800);
+        }
+
+        .requirements {
+            background: var(--primary-light);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .requirements h3 {
+            margin-bottom: 16px;
+        }
+
+        .req-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .req-item::before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--white);
+            color: var(--primary);
+            border-radius: 50%;
+            text-align: center;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .installation {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .installation h2 {
+            font-size: 28px;
+            margin-bottom: 24px;
+            color: var(--primary-dark);
+        }
+
+        .step {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--gray-100);
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--gray-800);
+            margin-top: 60px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .footer-link {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav a {
+                margin-left: 15px;
+            }
+
+            .download-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-secondary {
+                display: block;
+                margin-left: 0;
+                margin-top: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <span>🌾</span>
+                <span>AgriPort</span>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="#features">Features</a>
+                <a href="#installation">Installation</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Download AgriPort</h1>
+            <p>Smart Agricultural Platform for Modern Farmers - Available on Android</p>
+        </section>
+
+        <!-- Download Cards -->
+        <section class="download-cards">
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>Android App (APK)</h3>
+                <p>Latest version of AgriPort for Android devices</p>
+                <div class="version">Version 1.0 - Latest Build</div>
+                <div class="file-info">
+                    <strong>Size:</strong> 94 MB<br>
+                    <strong>Type:</strong> Release APK<br>
+                    <strong>Updated:</strong> May 18, 2026
+                </div>
+                <a href="uploads/agriport-release-latest.apk" download class="btn">📥 Download APK</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3>Web Version</h3>
+                <p>Use AgriPort directly in your web browser</p>
+                <div class="version">Version 1.0 - Latest</div>
+                <div class="file-info">
+                    <strong>Responsive:</strong> Yes<br>
+                    <strong>Browser:</strong> All Modern<br>
+                    <strong>Size:</strong> Minimal
+                </div>
+                <a href="../" class="btn">🌐 Open Web App</a>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h3>Documentation</h3>
+                <p>Learn how to use AgriPort effectively</p>
+                <div class="version">Updated Regularly</div>
+                <div class="file-info">
+                    <strong>Guides:</strong> Complete<br>
+                    <strong>Videos:</strong> Available<br>
+                    <strong>Support:</strong> 24/7
+                </div>
+                <a href="docs.html" class="btn">📖 View Docs</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <h2>🎯 Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>📊 Farm Management</h4>
+                    <p>Track crops, inventory, and farm activities in real-time</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🌾 Crop Tracking</h4>
+                    <p>Monitor crop growth and health with detailed analytics</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📈 Real-time Reports</h4>
+                    <p>Generate comprehensive reports for better decision making</p>
+                </div>
+                <div class="feature-item">
+                    <h4>💬 Chat System</h4>
+                    <p>Connect with other farmers and traders instantly</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🚚 Transport Management</h4>
+                    <p>Manage crop transportation and logistics efficiently</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📱 Multi-Device</h4>
+                    <p>Access from phone, tablet, or desktop anytime</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔒 Secure Login</h4>
+                    <p>Protected account with username and password</p>
+                </div>
+                <div class="feature-item">
+                    <h4>⚡ Fast Performance</h4>
+                    <p>Optimized for speed and responsiveness</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirements -->
+        <section class="requirements">
+            <h3>📋 System Requirements</h3>
+            <div class="req-item">Android 6.0 or higher</div>
+            <div class="req-item">Minimum 2GB RAM</div>
+            <div class="req-item">100MB free storage space</div>
+            <div class="req-item">Internet connection (Wi-Fi or mobile)</div>
+            <div class="req-item">Modern web browser (for web version)</div>
+        </section>
+
+        <!-- Installation Guide -->
+        <section class="installation" id="installation">
+            <h2>📱 Installation Guide</h2>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Download the APK</strong>
+                <p>Click the "Download APK" button above to download the latest version</p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Enable Unknown Sources</strong>
+                <p>Go to Settings → Security → Enable "Unknown Sources" (if required)</p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Install the App</strong>
+                <p>Open the downloaded APK file and tap "Install"</p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Grant Permissions</strong>
+                <p>Grant necessary permissions when prompted (camera, storage, etc.)</p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">5</span>
+                <strong>Launch AgriPort</strong>
+                <p>Tap the app icon to start using AgriPort</p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">6</span>
+                <strong>Create Account</strong>
+                <p>Sign up with your details or use a test account</p>
+            </div>
+        </section>
+
+        <!-- Quick Links -->
+        <section style="background: var(--white); border-radius: 12px; padding: 40px; box-shadow: var(--shadow); text-align: center; margin-bottom: 40px;">
+            <h2 style="color: var(--primary-dark); margin-bottom: 24px;">Need Help?</h2>
+            <p style="margin-bottom: 24px;">Have questions or issues? We're here to help!</p>
+            <a href="contact.html" class="btn">📞 Contact Support</a>
+            <a href="faq.html" class="btn btn-secondary">❓ FAQ</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AgriPort. All rights reserved.</p>
+        <div>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+            <a href="contact.html" class="footer-link">Contact Us</a>
+        </div>
+    </footer>
+</body>
+</html>
